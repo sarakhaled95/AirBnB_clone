@@ -6,11 +6,22 @@ from datetime import datetime
 
 
 class BaseModel:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """constructor method"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if kwargs == {}:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            return
+
+        for key, value in kwargs.items():
+            if key == '__class__':
+                continue
+            self.__dict__[key] = value
+        if 'created_at' in kwargs:
+            self.created_at = datetime.now()
+        if 'updated_at' in kwargs:
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """string representation od class name and id"""
@@ -26,4 +37,6 @@ class BaseModel:
         """returns a dictionary containing all keys/values"""
         my_dict = self.__dict__
         my_dict['__class__'] = __class__.__name__
+        my_dict['created_at'] = self.created_at.isoformat()
+        my_dict['updated_at'] = self.updated_at.isoformat()
         return my_dict
