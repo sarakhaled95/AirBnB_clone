@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """BaseModel class module"""
+import json
 import uuid
 from datetime import datetime
 
@@ -23,4 +24,5 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
         my_dict = self.__dict__
-        my_dict['__class__'] = type(self.__name__)
+        my_dict['__class__'] = __class__.__name__
+        return my_dict
