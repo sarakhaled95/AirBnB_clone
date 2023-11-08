@@ -9,17 +9,18 @@ class BaseModel:
     def __init__(self):
         """constructor method"""
         self.id = str(uuid.uuid4())
-        self.create_at = datetime.now().isoformat()
-        self.update_at = self.create_at
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
 
     def __str__(self):
         """string representation od class name and id"""
         return '[{}] ({}) {}'.\
-                format(type(self).__name__, self.id, self.__dict__)
+               format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """it will be updated every time you change your object"""
-        self.update_at = datetime.now().isoformat()
+        self.updated_at = datetime.now().isoformat()
+        self.created_at = self.created_at.isoformat()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
