@@ -31,7 +31,7 @@ class BaseModel:
 
     def save(self):
         """it will be updated every time you change your object"""
-        self.updated_at = datetime.now().isoformat()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
