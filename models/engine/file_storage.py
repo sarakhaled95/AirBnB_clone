@@ -10,7 +10,7 @@ class FileStorage:
     """class that serializes instances to a JSON file and 
     deserializes JSON file to instances"""
     __file_path: str = "file.json"
-    __objects: dict = {}
+    __objects = {}
 
     def __init__(self):
         """constructor"""
@@ -27,22 +27,24 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
-        ser = {
-                key: value.to_dict()
-                for key, value in self.__objects.items()
-        }
-        with open(FileStorage.__file_path, "w") as f:
-            f.write(json.dumps(ser))
+        data = {}
+        for key, value in self.__objects.items():
+            class_name, obj_id = key.split('.')
+            if class_name not in data:
+                data[class_name] = {}
+            data[class_name][obj_id] = value.to_dict()
+        with open(self.__file_path, "w") as f:
+            json.dump(data, f)
 
     def reload(self):
         """ deserializes the JSON file"""
         try:
-            deser = {}
-            with open(FileStorage.__file_path, "r") as f:
-                deser = json.loads(f.read())
-            FileStorage.__objects = {
-                    key:
-                        eval(obj["__class__"])(**obj)
-                        for key, obj in deser.items()}
+            with open(self.__file_path, "r") as f:
+                data = json.load(f)
+            for class_name, objects in data.items():
+                for obj_id, obj_data in objects.items():
+                    class_obj = globals()[class_name]
+                    obj = class_obj(**obj_data)
+                    self.__objects[f"{class_name}.{obj_id}"] = obj
         except (FileNotFoundError, JSONDecodeError):
             pass
