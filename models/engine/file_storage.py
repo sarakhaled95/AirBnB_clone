@@ -77,4 +77,12 @@ class FileStorage:
         del M.__objects[key]
         self.save()
 
-    def find_all(
+    def find_all(self, model=""):
+        """find all models"""
+        if model and model not in FileStorage.models:
+            raise ModelNotFoundError(model)
+        result = []
+        for key, value in FileStorage.__objects.items():
+            if key.startswith(model):
+                result.append(str(value))
+        return result
