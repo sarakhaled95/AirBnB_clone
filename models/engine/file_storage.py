@@ -4,13 +4,16 @@ import json
 from json.decoder import JSONDecodeError
 from models.base_model import BaseModel
 from datetime import datetime
+from models.engine.errors import *
 
 
 class FileStorage:
-    """class that serializes instances to a JSON file and 
+    """class that serializes instances to a JSON file and
     deserializes JSON file to instances"""
     __file_path: str = "file.json"
     __objects = {}
+    models = ("BaseModel")
+
 
     def __init__(self):
         """constructor"""
@@ -48,3 +51,28 @@ class FileStorage:
                     self.__objects[f"{class_name}.{obj_id}"] = obj
         except (FileNotFoundError, JSONDecodeError):
             pass
+
+    def find_by_id(self, model, obj_id):
+        """finds and return model by its id"""
+        M = FileStorage
+        if model not in M.models:
+            raise ModelNotFoundError(model)
+
+        key = model + "." + obj_id
+        if key not in M.__objects:
+            raise InstanceNotFoundError(obj_id, model)
+
+        return M.__objects[key]
+
+    def del_by_id(self, model, obj_id):
+        """finds and delets model by id"""
+        M = FileStorage
+        if model not in M.models:
+            raise ModelNotFoundError(model)
+
+        key = model + "." + obj_id
+        if key not in M.__objects:
+            raise InstanceNotFoundError(obj_id, model)
+
+        del M.__objects[key]
+        self.save()
