@@ -87,7 +87,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             print("** Too many argument for destroy **")
-            pass
 
     def do_all(self, arg):
         """Prints all string representation of all instances
@@ -101,7 +100,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 print("** Too many argument for all **")
-                pass
 
 
 def parse(line: str):

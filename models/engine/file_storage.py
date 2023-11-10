@@ -76,3 +76,5 @@ class FileStorage:
 
         del M.__objects[key]
         self.save()
+
+    def find_all(
