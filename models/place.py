@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """place class module"""
-from model.base_model import BaseModel
+from models.base_model import BaseModel
+from typing import List
 
 
 class Place(BaseModel):
