@@ -5,6 +5,7 @@ from models import storage
 from models.base_model import BaseModel
 from models.engine.errors import *
 import shlex
+from models.user import User
 
 
 classes = storage.models
@@ -124,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             except InstanceNotFoundError:
                 print("** no instance found **")
+
 
 def parse(line: str):
     """splits lines to words using spaces"""

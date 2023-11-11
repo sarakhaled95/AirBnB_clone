@@ -5,6 +5,7 @@ from json.decoder import JSONDecodeError
 from models.base_model import BaseModel
 from datetime import datetime
 from models.engine.errors import *
+from models.user import User
 
 
 class FileStorage:
@@ -12,8 +13,7 @@ class FileStorage:
     deserializes JSON file to instances"""
     __file_path: str = "file.json"
     __objects = {}
-    models = ("BaseModel")
-
+    models = ("BaseModel", "User")
 
     def __init__(self):
         """constructor"""
