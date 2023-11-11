@@ -126,6 +126,29 @@ class HBNBCommand(cmd.Cmd):
             except InstanceNotFoundError:
                 print("** no instance found **")
 
+    def handle_cls_m(self, arg):
+        """handles class methods"""
+
+        prints = ("all(", "show(", "count(", "create(")
+        try:
+            value = eval(arg)
+            for i in prints:
+                if i in arg:
+                    print(value)
+                    break
+            return
+        except AttributeError:
+            print("** invalid method **")
+        except InstanceNotFoundError:
+            print("** no instance found **")
+        except TypeError as t:
+            field = t.args[0].split()[-1].replace("_", " ")
+            field = field.strip("'")
+            print(f"** {field} missing **")
+        except Exception as e:
+            print("** invalid syntax **")
+            pass
+
 
 def parse(line: str):
     """splits lines to words using spaces"""
