@@ -149,6 +149,19 @@ class HBNBCommand(cmd.Cmd):
             print("** invalid syntax **")
             pass
 
+    def default(self, arg):
+        """Override default method to handle class methods"""
+        if '.' in arg and arg[-1] == ')':
+            if arg.split('.')[0] not in classes:
+                print("** class doesn't exist **")
+                return
+            return self.handle_class_methods(arg)
+        return Cmd.default(self, arg)
+
+    def emptyline(self):
+        """Override empty line to do nothing"""
+        return
+
 
 def parse(line: str):
     """splits lines to words using spaces"""
