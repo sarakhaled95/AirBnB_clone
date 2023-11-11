@@ -130,7 +130,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             except InstanceNotFoundError:
                 print("** no instance found **")
-                
+
     def do_models(self, arg):
         """print all registered models"""
         print(*classes)
