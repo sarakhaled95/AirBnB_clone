@@ -135,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
         """print all registered models"""
         print(*classes)
 
-    def handle_cls_m(self, arg):
+    def handle_class_methods(self, arg):
         """handles class methods"""
 
         prints = ("all(", "show(", "count(", "create(")
