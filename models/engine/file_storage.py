@@ -86,3 +86,24 @@ class FileStorage:
             if key.startswith(model):
                 result.append(str(value))
         return result
+
+    def update_1(self, model, xid, field, value):
+        """updates an instance"""
+        M = FileStorage
+        if model not in M.models:
+            raise ModelNotFoundError(model)
+
+        key = model + "." + xid
+        if key not in M.__objects:
+            raise InstanceNotFoundError(xid, model)
+        if field in ("id", "updated_at", "created_at"):
+            return
+        instance = M.__objects[key]
+        try:
+            value_type = type(instance.__dict__[field])
+            instance.__dict__[field] = value_type(value)
+        except KeyError:
+            instance.__dict__[field] = value
+        finally:
+            instance.updated_at = datetime.now()
+            self.save()

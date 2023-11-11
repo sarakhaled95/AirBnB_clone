@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_create(self, args):
-        """create new instance of BaseModel, saves it 
+        """create new instance of BaseModel, saves it
         (to the JSON file)
         throws error if model name doesnot exist or missing"""
 
@@ -45,6 +45,7 @@ class HBNBCommand(cmd.Cmd):
             tmp.save()
         else:
             print("** Too many argument for create **")
+            pass
 
     def do_show(self, arg):
         """Prints the string representation of an instance
@@ -67,7 +68,8 @@ class HBNBCommand(cmd.Cmd):
             except InstanceNotFoundError:
                 print("** no instance found **")
         else:
-             print("** Too many argument for show **")
+            print("** Too many argument for show **")
+            pass
 
     def do_destroy(self, arg):
         """ Deletes an instance based on the class name and id"""
@@ -87,6 +89,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             print("** Too many argument for destroy **")
+            pass
 
     def do_all(self, arg):
         """Prints all string representation of all instances
@@ -98,14 +101,35 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.find_all(*args))
             except ModelNotFoundError:
                 print("** class doesn't exist **")
-            else:
-                print("** Too many argument for all **")
+        else:
+            print("** Too many argument for all **")
+            pass
 
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute"""
+        args, n = parse(arg)
+        if not n:
+            print("** class name missing **")
+        elif n == 1:
+            print("** instance id missing **")
+        elif n == 2:
+            print("** attribute name missing **")
+        elif n == 3:
+            print("** value missing **")
+        else:
+            try:
+                storage.update_1(*args[0:4])
+            except ModelNotFoundError:
+                print("** class doesn't exist **")
+            except InstanceNotFoundError:
+                print("** no instance found **")
 
 def parse(line: str):
-        """splits lines to words using spaces"""
-        args = shlex.split(line)
-        return args, len(args)
+    """splits lines to words using spaces"""
+    args = shlex.split(line)
+    return args, len(args)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
