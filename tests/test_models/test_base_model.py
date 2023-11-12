@@ -113,5 +113,39 @@ class TestBaseModel_save(unittest.TestCase):
         with self.assertRaises(TypeError):
             bm.save(None)
 
+    def test_save_updates_file(self):
+        bm = BaseModel()
+        bm.save()
+        bmid = "BaseModel." + bm.id
+        with open("file.json", "r") as f:
+            self.assertIn(bmid, f.read())
+
+class TestBaseModel_to_dict(unittest.TestCase):
+    """Unittests for testing to_dict method of the BaseModel class."""
+
+    def test_to_dict_type(self):
+        bm = BaseModel()
+        self.assertTrue(dict, type(bm.to_dict()))
+
+    def test_to_dict_contains_correct_keys(self):
+        bm = BaseModel()
+        self.assertIn("id", bm.to_dict())
+        self.assertIn("created_at", bm.to_dict())
+        self.assertIn("updated_at", bm.to_dict())
+        self.assertIn("__class__", bm.to_dict())
+
+    def test_to_dict_output(self):
+        dt = datetime.today()
+        bm = BaseModel()
+        bm.id = "123456"
+        bm.created_at = bm.updated_at = dt
+        tdict = {
+            'id': '123456',
+            '__class__': 'BaseModel',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat()
+        }
+        self.assertDictEqual(bm.to_dict(), tdict)
+
 if __name__ == "__main__":
     unittest.main()
