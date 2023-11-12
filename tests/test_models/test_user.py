@@ -64,5 +64,30 @@ class TestUser_inst(unittest.TestCase):
         self.assertIn("'created_at': " + dt_repr, usstr)
         self.assertIn("'updated_at': " + dt_repr, usstr)
 
+class TestUser_to_dict(unittest.TestCase):
+    """Unittests for testing to_dict method of the User class."""
+
+    def test_to_dict_type(self):
+        self.assertTrue(dict, type(User().to_dict()))
+
+    def test_to_dict_contains_correct_keys(self):
+        us = User()
+        self.assertIn("id", us.to_dict())
+        self.assertIn("created_at", us.to_dict())
+        self.assertIn("updated_at", us.to_dict())
+        self.assertIn("__class__", us.to_dict())
+
+    def test_to_dict_contains_added_attributes(self):
+        us = User()
+        us.middle_name = "khaled"
+        us.my_number = 10
+        self.assertEqual("khaled", us.middle_name)
+        self.assertIn("my_number", us.to_dict())
+
+    def test_contrast_to_dict_dunder_dict(self):
+        us = User()
+        self.assertNotEqual(us.to_dict(), us.__dict__)
+
+
 if __name__ == "__main__":
     unittest.main()
