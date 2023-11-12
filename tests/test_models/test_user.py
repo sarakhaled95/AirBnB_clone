@@ -64,6 +64,7 @@ class TestUser_inst(unittest.TestCase):
         self.assertIn("'created_at': " + dt_repr, usstr)
         self.assertIn("'updated_at': " + dt_repr, usstr)
 
+
 class TestUser_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the User class."""
 
@@ -87,6 +88,35 @@ class TestUser_to_dict(unittest.TestCase):
     def test_contrast_to_dict_dunder_dict(self):
         us = User()
         self.assertNotEqual(us.to_dict(), us.__dict__)
+
+
+class TestUser_save(unittest.TestCase):
+    """Unittests for testing save method of the  class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        us = User()
+        sleep(0.05)
+        first_updated_at = us.updated_at
+        us.save()
+        self.assertLess(first_updated_at, us.updated_at)
 
 
 if __name__ == "__main__":

@@ -69,8 +69,9 @@ class TestBaseModel_inst(unittest.TestCase):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
 
+
 class TestBaseModel_save(unittest.TestCase):
-    """Unittests for testing save method of the BaseModel class."""    
+    """Unittests for testing save method of the BaseModel class."""
 
     @classmethod
     def setUp(self):
@@ -120,6 +121,7 @@ class TestBaseModel_save(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn(bmid, f.read())
 
+
 class TestBaseModel_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the BaseModel class."""
 
@@ -146,6 +148,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
             'updated_at': dt.isoformat()
         }
         self.assertDictEqual(bm.to_dict(), tdict)
+
 
 if __name__ == "__main__":
     unittest.main()
