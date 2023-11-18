@@ -1,8 +1,12 @@
-.filters{
+.filters {
     background-color: white;
     height: 70px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .filters button {
     font-size: 18px;
@@ -12,6 +16,7 @@
     width: 20%;
     border: 0;
     border-radius: 4px;
+    position:absolute;
     right: 30px;
 }
 .filters button:hover {
