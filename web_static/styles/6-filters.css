@@ -63,7 +63,7 @@ div.locations ul, div.amenities ul{
 div.locations ul.popover h2 {
         font-size: 16px;
         padding-left:5px;
-        padding-top: 2opx;
+        padding-top: 10px;
         margin-bottom: 0px;
         margin-top: 10px;
     }
@@ -73,13 +73,13 @@ section.filters div.amenities:hover ul {
     z-index: 999;
 }
 div.locations ul.popover {
-    padding-bottom: 20px;
-    padding-top: 10 px;
+    padding-bottom: 30px;
+    padding-top: 10px;
     padding-left: 10px;
     margin: 0px;
 }
 div.amenities ul.popover {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     padding-top: 20px;
     padding-left: 30px;
 }
