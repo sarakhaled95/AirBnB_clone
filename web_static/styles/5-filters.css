@@ -28,21 +28,23 @@
     width: 25%;
     border-right: 1px solid #DDDDDD;
     position: absolute;
-    left:20px;
+    left:0px;
 }
 .amenities {
     height: 100%;
     width: 25%;
     position: absolute;
-    left: 30%;
+    left: 25%;
 }
 .locations h3, .amenities h3 {
     font-weight: 600;
     margin-bottom: 0;
+    padding-left: 30px;
 }
 div.locations h4, div.amenities h4 {
     font-size: 14px;
     font-weight: 400;
     margin-top: 5px;
+    padding-left: 30px;
 
 }

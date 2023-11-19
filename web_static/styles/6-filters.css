@@ -7,9 +7,9 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
-section.filters button {
+.filters button {
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -20,48 +20,51 @@ section.filters button {
     position:absolute;
     right: 30px;
 }
-section.filters button:hover {
+.filters button:hover {
     opacity: 90%;
 }
-section.filters div.locations {
+.locations {
     height: 100%;
     width: 25%;
     border-right: 1px solid #DDDDDD;
     position: absolute;
-    left: 20px;
+    left: 0px;
 }
-section.filters div.amenities {
+.amenities {
     height: 100%;
     width: 25%;
     position: absolute;
-    left: 30%;
+    left:25%;
 }
-div.locations h3, div.amenities h3 {
+.locations h3, .amenities h3 {
     font-weight: 600;
     margin-bottom: 0;
+    margin-left: 0px;
+    padding-left:30px;
 }
-div.locations h4, div.amenities h4 {
+.locations h4, .amenities h4 {
     font-size: 14px;
     font-weight: 400;
     margin-top: 5px;
+    padding-left: 30px;
 }
 ul.popover {
     background-color: #FAFAFA;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    margin-top: 0px;
-    padding-left: 0px;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    position:relative;
 }
 div.locations ul, div.amenities ul{
     display:none;
 }
 div.locations ul.popover h2 {
         font-size: 16px;
-        padding-left: 35px;
-        margin-bottom: 4px;
-        margin-top: 0px;
+        padding-left:5px;
+        margin-bottom: 0px;
+        margin-top: 10px;
     }
 section.filters div.locations:hover ul,
 section.filters div.amenities:hover ul {
@@ -69,8 +72,19 @@ section.filters div.amenities:hover ul {
     z-index: 999;
 }
 div.locations ul.popover {
-    padding-bottom: 45px;
+    padding-bottom: 20px;
+}
+div.amenities ul.popover {
+    padding-bottom: 20px;
 }
 div.locations ul.popover li h2.Arizona {
-    margin-top: 20px;
+    margin-top: 30px;
+}
+ul ul{
+    list-style-type: none;
+}
+div.locations ul.popover li,
+div.amenities ul.popover li {
+    padding-left: 2px;
+    margin: 0px;
 }
