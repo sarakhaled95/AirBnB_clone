@@ -7,11 +7,11 @@
     font-size: 30px;
 }
 .places article {
-    text-align:center;
     border: 1px solid #FF5A5F;
     border-radius: 4px;
     width: 390px;
     margin:20px;
+    padding-left:15px;
     position: relative;
 }
 .places article h2 {
@@ -34,7 +34,7 @@
 }
 .information {
     height: 80px;
-    width: 360px;
+    width: 370px;
     border-top: 1px solid #DDDDDD;
     border-bottom: 1px solid #DDDDDD;
     display: flex;
@@ -71,7 +71,5 @@ div.information {
 .user, .discription {
     font-size:14px;
     text-align: left;
-    left:auto;
-    padding-left:15px;
+    padding-right:15px;
 }
-
